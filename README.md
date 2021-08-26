@@ -67,14 +67,13 @@ docker login
 # uninteractive mode
 docker login -u <username> -p <password>
 ```
-
+<!-- 
 Creating a tag for the image
 ```
 docker push rhexa/node
-``` 
-
+```  -->
 Now we can push our image to docker with the latest tag hub by running.
 ```
 # docker image push <repo>/<app>:<version>
-docker image push rhexa/node
+docker image push rhexa/node:<tag>
 ```
