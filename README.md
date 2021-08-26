@@ -45,6 +45,26 @@ Frequently used commands:
 - `EXPOSE <port-number>` expose the port (only notification)
 - `CMD ["<command>","<arguments>"]` starting point command
 
+Example of the Dockerfile
+```
+# specify the node base image with your desired version node:<version>
+FROM node:14.17-alpine
+
+# replace this with your application's default port
+# EXPOSE 8888
+
+# copy the web files to docker
+RUN mkdir -p /home/app
+COPY ./app /home/app
+
+WORKDIR /home/app
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
 ## Creating an image from a newly created Dockerfile
 In this example the docker file is inside the current working directory.
 
