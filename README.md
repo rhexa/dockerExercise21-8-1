@@ -8,6 +8,14 @@ Lab Docker is created for learning and practicing purpose of working with Docker
   - Install [Docker](https://docs.docker.com/get-docker/)
   - Install Docker by executing [this script](https://github.com/rhexa/dockerExercise21-8-1/blob/main/apt/docker.sh) on Debian base Operating System
   - Check if Docker has been succesfully installed by running `docker -v` on terminal
+  - To run docker without sudo privilege, we need to add our user to a docker group. On debian based OS we need can run.
+```
+sudo usermod -aG docker <username>
+```
+  - Log off the session and check if the user has been succesfully added to the docker group
+```
+ groups 
+```
 
 ### Running Docker
 - Create a new directory for Docker project
@@ -42,5 +50,31 @@ In this example the docker file is inside the current working directory.
 
 Run this command to build the image
 ```
-docker build
+# docker build . --tag <repo>/<version>:<tag>
+docker build . --tag myrepo/myapp:0.0.1
+```
+Check if the image succesfully build by running.
+```
+docker images
+```
+
+## Publishing the image to the Docker HUB
+First we need to login to our account by creating the access token from [Docker Hub](https://hub.docker.com/settings/security) account. Once the token created, we can authenticate ourself by running.
+```
+# interactive mode
+docker login
+
+# uninteractive mode
+docker login -u <username> -p <password>
+```
+
+Creating a tag for the image
+```
+docker push rhexa/node
+``` 
+
+Now we can push our image to docker with the latest tag hub by running.
+```
+# docker image push <repo>/<app>:<version>
+docker image push rhexa/node
 ```
