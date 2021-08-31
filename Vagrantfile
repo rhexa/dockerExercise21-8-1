@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  # config.vm.define "lab-docker" do |config|
+  config.vm.define "lab-docker" do |config|
     # boxes at https://vagrantcloud.com/search.
     config.vm.box = "ubuntu/focal64"
 
@@ -40,5 +40,5 @@ Vagrant.configure("2") do |config|
     SHELL
 
     config.vm.provision "shell", path: "apt/docker.sh"
-  # end
+  end
 end
