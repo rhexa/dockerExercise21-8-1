@@ -23,3 +23,6 @@ echo \
 # install docker
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# install docker-compose
+sudo apt install -y docker-compose
