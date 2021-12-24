@@ -12,9 +12,27 @@ Lab Docker is created for learning and practicing purpose of working with Docker
 ```
 sudo usermod -aG docker <username>
 ```
+  - If docker group does not exists create it and add user to it
+```
+sudo groupadd docker
+sudo usermod -aG docker <username>
+```
   - Log off the session and check if the user has been succesfully added to the docker group
 ```
  groups 
+```
+
+#### Error found when installing docker
+##### Permission Denied
+Make sure we have the right permission to run docker.
+Easiest thing we can try to solve this issue is by running docker with sudo.
+If we are trying to run docker with basic user, ensure that these files have the right permission:
+  - ~/.docker (docker config file)
+  - /var/run/docker.sock  (socket file)
+Run this command to quickly change the ownership of the files to the current user.
+```
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chown "$USER":"$USER" /var/run/docker.sock
 ```
 
 ### Running Docker
@@ -28,6 +46,7 @@ cd <docker-project-directory>
 
 ## Working with Dockerfile
 Docker file is a docker config file to define and build a custom image.
+The dafault name is Dockerfile and located in the project root directory
 
 ### Specifying the base image
 In this example we are using node JS image [Node JS image](https://hub.docker.com/_/node)
@@ -50,9 +69,6 @@ Example of the Dockerfile
 # specify the node base image with your desired version node:<version>
 FROM node:14.17-alpine
 
-# replace this with your application's default port
-# EXPOSE 8888
-
 # copy the web files to docker
 RUN mkdir -p /home/app
 COPY ./app /home/app
@@ -60,6 +76,7 @@ COPY ./app /home/app
 WORKDIR /home/app
 RUN npm install
 
+# replace this with your application's default port
 EXPOSE 3000
 
 CMD ["npm", "start"]
