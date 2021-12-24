@@ -29,6 +29,7 @@ Easiest thing we can try to solve this issue is by running docker with sudo.
 If we are trying to run docker with basic user, ensure that these files have the right permission:
   - ~/.docker (docker config file)
   - /var/run/docker.sock  (socket file)
+
 Run this command to quickly change the ownership of the files to the current user.
 ```
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
